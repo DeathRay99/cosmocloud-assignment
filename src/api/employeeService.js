@@ -1,7 +1,7 @@
 export const fetchEmployees = async () => {
     try {
       const response = await fetch(
-        "https://free-ap-south-1.cosmocloud.io/development/api/employees?limit=9&offset=0",
+        "https://free-ap-south-1.cosmocloud.io/development/api/employees?limit=20&offset=0",
         {
           method: "GET",
           headers: {
