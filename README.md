@@ -3,6 +3,7 @@
 ## Overview
 
 This project is a simple Employee Management System built using Vite and React. It allows users to view, add, and delete employee records. The application fetches data from a remote API and performs CRUD operations.
+[HostedLink](https://cosmocloud-assignment-henna.vercel.app/) hosted link of the project
 
 ## Prerequisites
 
