@@ -58,6 +58,8 @@ Create a `.env` file in the root directory of the project and add the following 
 VITE_ENVIRONMENT_ID=your_cosmocloud_environment_id
 VITE_PROJECT_ID=your_cosmocloud_project_id
 ```
+These environment variables are required in the headers when making API calls, so they are important for the application to function correctly. Replace your_cosmocloud_environment_id and your_cosmocloud_project_id with the actual values obtained from CosmoCloud.
+
 ### 4. Install dependencies
 
 You can use either npm or yarn to install the project dependencies:
