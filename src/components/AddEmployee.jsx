@@ -1,131 +1,126 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddEmployee = ({ onAddEmployee }) => {
   const navigate = useNavigate();
-  const [name, setName] = useState('');
-  const [line1, setLine1] = useState('');
-  const [city, setCity] = useState('');
-  const [country, setCountry] = useState('');
-  const [zipcode, setZipcode] = useState('');
-  const [contactMethods, setContactMethods] = useState([{ contact_method: '', value: '' }]);
-
-  const handleAddContactMethod = () => {
-    setContactMethods([...contactMethods, { contact_method: '', value: '' }]);
-  };
-
-  const handleRemoveContactMethod = (index) => {
-    const newMethods = contactMethods.slice();
-    newMethods.splice(index, 1);
-    setContactMethods(newMethods);
-  };
-
-  const handleContactMethodChange = (index, field, value) => {
-    const newMethods = contactMethods.slice();
-    newMethods[index][field] = value;
-    setContactMethods(newMethods);
-  };
+  const nameRef = useRef("");
+  const line1Ref = useRef("");
+  const cityRef = useRef("");
+  const countryRef = useRef("");
+  const zipcodeRef = useRef("");
+  const phoneRef = useRef("");
+  const emailRef = useRef("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newEmployee = {
-      name,
-      emp_id: Date.now(), // Just a placeholder, replace with API ID
+      name: nameRef.current?.value,
       address: {
-        line1,
-        city,
-        country,
-        zipcode,
+        line1: line1Ref.current?.value,
+        city: cityRef.current?.value,
+        country: countryRef.current?.value,
+        zipcode: zipcodeRef.current?.value,
       },
-      contactMethods,
+      contact_method: {
+        phone: phoneRef.current?.value,
+        email: emailRef.current?.value,
+      },
     };
+    // console.log(newEmployee);
     onAddEmployee(newEmployee);
-    navigate('/');
+    navigate("/");
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-4 rounded shadow-md mt-4">
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white p-4 rounded shadow-md mt-4 w-[50%] mx-auto"
+    >
       <h2 className="text-xl mb-4">Add Employee</h2>
       <div className="mb-4">
-        <label className="block mb-2">Name</label>
+        <label htmlFor="name" className="block mb-2">
+          Name
+        </label>
         <input
           type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          id="name"
+          ref={nameRef}
+          className="border px-2 py-1 rounded w-full"
+          required
+        />
+      </div>
+      <div className="mb-4">
+        <label className="block mb-2" htmlFor="address">
+          Address Line 1
+        </label>
+        <input
+          type="text"
+          id="address"
+          ref={line1Ref}
           className="border px-2 py-1 rounded w-full"
         />
       </div>
       <div className="mb-4">
-        <label className="block mb-2">Address Line 1</label>
+        <label htmlFor="city" className="block mb-2">
+          City
+        </label>
         <input
           type="text"
-          value={line1}
-          onChange={(e) => setLine1(e.target.value)}
+          id="city"
+          ref={cityRef}
           className="border px-2 py-1 rounded w-full"
         />
       </div>
       <div className="mb-4">
-        <label className="block mb-2">City</label>
+        <label htmlFor="country" className="block mb-2">
+          Country
+        </label>
         <input
           type="text"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
+          id="country"
+          ref={countryRef}
           className="border px-2 py-1 rounded w-full"
         />
       </div>
       <div className="mb-4">
-        <label className="block mb-2">Country</label>
+        <span htmlFor="zipcode" className="block mb-2">
+          Zip Code
+        </span>
         <input
           type="text"
-          value={country}
-          onChange={(e) => setCountry(e.target.value)}
-          className="border px-2 py-1 rounded w-full"
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block mb-2">Zip Code</label>
-        <input
-          type="text"
-          value={zipcode}
-          onChange={(e) => setZipcode(e.target.value)}
+          id="zipcode"
+          ref={zipcodeRef}
           className="border px-2 py-1 rounded w-full"
         />
       </div>
       <h3 className="text-lg mb-2">Contact Methods</h3>
-      {contactMethods.map((method, index) => (
-        <div key={index} className="mb-4 flex">
-          <select
-            value={method.contact_method}
-            onChange={(e) => handleContactMethodChange(index, 'contact_method', e.target.value)}
-            className="border px-2 py-1 rounded mr-2"
-          >
-            <option value="">Select Method</option>
-            <option value="EMAIL">Email</option>
-            <option value="PHONE">Phone</option>
-          </select>
-          <input
-            type="text"
-            value={method.value}
-            onChange={(e) => handleContactMethodChange(index, 'value', e.target.value)}
-            className="border px-2 py-1 rounded flex-grow"
-          />
-          <button
-            type="button"
-            className="bg-red-500 text-white px-2 py-1 rounded ml-2"
-            onClick={() => handleRemoveContactMethod(index)}
-          >
-            Remove
-          </button>
-        </div>
-      ))}
+      <div className="mb-4">
+        <label htmlFor="phone" className="block mb-2">
+          Phone
+        </label>
+        <input
+          type="tel"
+          id="phone"
+          ref={phoneRef}
+          className="border px-2 py-1 rounded w-full"
+        />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="email" className="block mb-2">
+          Email
+        </label>
+        <input
+          type="email"
+          id="email"
+          ref={emailRef}
+          className="border px-2 py-1 rounded w-full"
+        />
+      </div>
+
       <button
-        type="button"
-        className="bg-blue-500 text-white px-2 py-1 rounded mb-4"
-        onClick={handleAddContactMethod}
+        type="submit"
+        className="bg-green-500 text-white px-4 py-2 rounded"
       >
-        Add Contact Method
-      </button>
-      <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded">
         Add Employee
       </button>
     </form>

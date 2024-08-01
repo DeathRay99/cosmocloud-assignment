@@ -29,10 +29,25 @@ const App = () => {
     };
 
     fetchEmployees();
-  }, []);
+  }, [employees]);
 
-  const handleAddEmployee = (newEmployee) => {
-    setEmployees([...employees, newEmployee]);
+  const handleAddEmployee = async (newEmployee) => {
+    try {
+      await fetch(
+        "https://free-ap-south-1.cosmocloud.io/development/api/employees",
+        {
+          method: "POST",
+          headers: {
+            environmentId: import.meta.env.VITE_ENVIRONMENT_ID,
+            projectId: import.meta.env.VITE_PROJECT_ID,
+          },
+          body: JSON.stringify(newEmployee),
+        }
+      );
+      setEmployees((prevEmployees) => [...prevEmployees, newEmployee]);
+    } catch (error) {
+      console.error("Error adding employee:", error);
+    }
   };
 
   const handleDeleteEmployee = async (empId) => {
@@ -48,7 +63,9 @@ const App = () => {
           body: JSON.stringify({}),
         }
       );
-      setEmployees((prevEmployees) => prevEmployees.filter((emp) => emp._id !== empId));
+      setEmployees((prevEmployees) =>
+        prevEmployees.filter((emp) => emp._id !== empId)
+      );
     } catch (error) {
       console.error("Error deleting employee", error);
     }
