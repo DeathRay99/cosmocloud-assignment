@@ -26,8 +26,8 @@ const App = () => {
   }, []);
 
   const handleAddEmployee = async (newEmployee) => {
-    await addEmployee(newEmployee);
-    loadEmployees();
+    const addedEmployee=await addEmployee(newEmployee);
+    setEmployees((prevEmployees)=>[...prevEmployees,addedEmployee])
   };
 
 

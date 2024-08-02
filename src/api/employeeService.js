@@ -20,7 +20,7 @@ export const fetchEmployees = async () => {
   
   export const addEmployee = async (newEmployee) => {
     try {
-      await fetch(
+      const response = await fetch(
         "https://free-ap-south-1.cosmocloud.io/development/api/employees",
         {
           method: "POST",
@@ -31,6 +31,9 @@ export const fetchEmployees = async () => {
           body: JSON.stringify(newEmployee),
         }
       );
+      const data=await response.json();
+      return {...newEmployee,_id:data.id};
+
     } catch (error) {
       console.error("Error adding employee:", error);
     }
