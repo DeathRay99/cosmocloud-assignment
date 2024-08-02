@@ -9,7 +9,7 @@ const EmployeeList = ({ employees, onDeleteEmployee }) => {
         <p className="text-center">No Employees in the system</p>
       ) : (
         <>
-          <div className="flex justify-between items-center p-2">
+          <div className="flex flex-col gap-2 justify-between items-center p-2 sm:flex-row ">
             <h1 className="text-2xl font-bold ">Employees</h1>
             <div className="bg-green-500 text-white px-2 py-1 rounded"><Link to={`/add`} className="">+ Add new employee</Link></div>
           </div>
