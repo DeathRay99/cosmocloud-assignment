@@ -34,7 +34,7 @@ const AddEmployee = ({ onAddEmployee }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white p-4 rounded shadow-md mt-4 w-[50%] mx-auto"
+      className="bg-white p-4 rounded shadow-md mt-4 w-[90%] mx-auto sm:w-[50%]"
     >
       <h2 className="text-xl mb-4">Add Employee</h2>
       <div className="mb-4">

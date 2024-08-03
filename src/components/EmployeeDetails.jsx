@@ -35,7 +35,7 @@ const EmployeeDetails = () => {
   }
 
   return (
-    <div className="bg-white p-4 rounded shadow-md w-[60%]  mx-auto mt-5">
+    <div className="bg-white p-4 rounded shadow-md w-[90%] sm:w-[60%] mx-auto mt-5">
       <Link to="/" className="text-blue-500 hover:underline">
         Back to list
       </Link>
